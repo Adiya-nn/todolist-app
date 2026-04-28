@@ -1,0 +1,14 @@
+@WebServlet("/doctors")
+public class DoctorsListServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        DoctorsService service = new DoctorsServiceImpl();
+        List<Doctors> doctorsList = service.getAllDoctors();
+
+        request.setAttribute("doctorsList", doctorsList);
+        request.getRequestDispatcher("doctors.jsp").forward(request, response);
+    }
+}
+
