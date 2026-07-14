@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loadTasks, saveTasks } from "../tasks/taskStore";
 import type { Task, TaskStatus, TaskPriority } from "../tasks/taskStore";
 import { getUser } from "../auth/auth";
@@ -28,6 +29,7 @@ function isOverdue(task: Task) {
 }
 
 export default function Tasks() {
+  const navigate = useNavigate();
   const user = getUser();
   const email = user?.email ?? "";
 
@@ -140,6 +142,14 @@ export default function Tasks() {
     <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-6">
       <div className="mx-auto max-w-6xl space-y-6">
         <div className="rounded-3xl bg-white/20 p-6 shadow-xl backdrop-blur-lg text-white">
+        <div className="mb-4">
+  <button
+    onClick={() => navigate("/dashboard")}
+    className="rounded-lg bg-white/20 px-4 py-2 text-sm font-semibold hover:bg-white/30 transition"
+  >
+    ← Dashboard
+  </button>
+</div>
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-3xl font-bold">Task Board</h2>
